@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<bean abstract="true" lazy-init="true" id="baseDao">
+		<property name="noticeDao" ref="noticeDao"/>
+		<property name="resourcesDao" ref="resourcesDao"/>
+		<property name="rolesDao" ref="rolesDao"/>
+		<property name="usersDao" ref="usersDao"/>
+	</bean>
+	
+	<bean id="noticeAction" class="com.huaxin.action.NoticeAction" scope="prototype" parent="baseDao"/>
+</beans>
