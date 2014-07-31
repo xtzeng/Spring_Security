@@ -15,10 +15,10 @@ public class MainTest {
 	public static void main(String[] args) {
 		
 		/*
-true
-true
-false
-true
+			true
+			true
+			false
+			true
 		 */
 		//IllegalArgumentException
 		System.out.println(StringUtils.isBlank(" "));
