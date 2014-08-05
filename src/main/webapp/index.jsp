@@ -1,36 +1,42 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>xhEditor demo10 : showIframeModal接口的iframe文件上传</title>
-<script type="text/javascript" src="<%=basePath %>js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/xheditor/xheditor-1.1.6-zh-cn.min.js"></script>
-<script type="text/javascript">
-$(pageInit);
-function pageInit()
-{
-	$('#elm2').xheditor({skin:'nostyle',upLinkUrl:"!{editorRoot}xheditor_plugins/multiupload/multiupload.html?uploadurl={editorRoot}demos/upload.php%3Fimmediate%3D1&ext=附件文件(*.zip;*.rar;*.txt)",
-		upImgUrl:'!{editorRoot}xheditor_plugins/multiupload/multiupload.html?uploadurl=<%=basePath%>XhEditor%3Fimmediate%3D1&ext=图片文件(*.jpg;*.jpeg;*.gif;*.png)'
-	})
-}
-function submitForm(){$('#frmDemo').submit();}
-</script>
-</head>
-<body>
+<%@ page session="false" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<form id="frmDemo" method="post" action="show.php">
-	<h3>xhEditor demo10 : showIframeModal接口的iframe文件上传</h3>
-	
-	<textarea id="elm2" name="elm2" rows="12" cols="80" style="width: 80%">
-	</textarea>
-	<br/><br />
-	<input type="submit" name="save" value="Submit" />
-	<input type="reset" name="reset" value="Reset" />
-</form>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+  <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="<c:url value='/static/css/tutorial.css'/>" type="text/css" />
+      <title>Home Page</title>
+  </head>
+<body>
+<div id="content">
+<h1>Home Page</h1>
+<p>
+Anyone can view this page.
+</p>
+<p>
+While anyone can also view the <a href="listAccounts.html">list accounts</a> page, you must be authorized to post to an Account from the list accounts page.
+</p>
+<p>
+Your principal object is....: <%= request.getUserPrincipal() %>
+</p>
+<sec:authorize url='/secure/index.jsp'>
+<p>
+You can currently access "/secure" URLs.
+</p>
+</sec:authorize>
+<sec:authorize url='/secure/extreme/index.jsp'>
+<p>
+You can currently access "/secure/extreme" URLs.
+</p>
+</sec:authorize>
+
+<p>
+<a href="secure/index.jsp">Secure page</a></p>
+<p><a href="secure/extreme/index.jsp">Extremely secure page</a></p>
+</div>
 </body>
 </html>
